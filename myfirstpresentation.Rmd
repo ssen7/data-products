@@ -1,5 +1,5 @@
 ---
-title: "Data Products Course Project 1"
+title: "Data Products Course Project 2"
 author: "Saurav"
 date: "14 April 2018"
 output: ioslides_presentation
@@ -9,19 +9,22 @@ output: ioslides_presentation
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-## Leaflet Map
-```{r cars, echo = FALSE}
-library(leaflet)
+## plotly Example
 
-japBKIcon <- makeIcon(
-  iconUrl = "./japBK.jpg",
-  iconWidth = 31*215/230, iconHeight = 31,
-  iconAnchorX = 31*215/230/2, iconAnchorY = 16
-)
+Date created `r format(Sys.time(), '%d %B, %Y')`
 
-my_map <- leaflet() %>% addTiles() %>%
-  addMarkers(lat=35.736456, lng=139.718800, 
-             popup="Teikyo Heisei University",
-             icon = japBKIcon)
-my_map
+We are going to use the airquality dataset
+
+```{r echo = FALSE}
+suppressPackageStartupMessages(library(plotly))
+data("airquality")
+
+data <- airquality[complete.cases(airquality), ]
+data$Month <- month.name[data$Month]
+
+
+plot_ly(data = data, x = ~Month, y = ~Ozone, type = "scatter", mode = "markers", size = ~Wind, color = ~Temp)
 ```
+
+
+## Thanks!
